@@ -1,7 +1,6 @@
 package synthesizer;
 
 import javax.swing.JButton;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import java.awt.event.*;
 
@@ -9,9 +8,7 @@ public class MidiPane extends JPanel{
 
     private JButton playButton;
     private JButton stopButton;
-    private JList<String> displaylist;
-    private String[] dummygegevens = {"aap", "noot", "mies"};
-    private PlayAllSounds playallsounds;
+    private transient PlayAllSounds playallsounds; //transient because IDE preferes it like that ...
     
     public MidiPane(){
         
@@ -21,13 +18,9 @@ public class MidiPane extends JPanel{
 
         this.stopButton = new JButton("stop");
         stopButton.addActionListener((new ButtonListener()));
-        add(stopButton);
+        add(stopButton);      
 
-        this.displaylist = new JList<>(dummygegevens);
-        add(displaylist);
-
-        this.playallsounds = new PlayAllSounds();    
-        
+        this.playallsounds = new PlayAllSounds();          
     }
 
     class ButtonListener implements ActionListener{

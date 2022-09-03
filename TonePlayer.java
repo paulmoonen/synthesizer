@@ -13,8 +13,7 @@ public class TonePlayer extends JFrame{
         frame.setSize(400, 400);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("play a Java MIDI note");
-        MidiPane midipane = new MidiPane();
-        frame.setContentPane(midipane);
+        frame.setContentPane(new MidiPane());
         frame.setVisible(true);    
     } 
 }

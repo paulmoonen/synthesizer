@@ -21,7 +21,6 @@ public class MidiSynthesizer {
 
     public MidiSynthesizer(){
         try{        
-            //method getSynthesizer() throws a MidiUnavailableException
             this.synthesizer = MidiSystem.getSynthesizer();
             this.synthesizer.open();
 
@@ -35,7 +34,7 @@ public class MidiSynthesizer {
             //available instruments to this synthesizer
             this.availableinstruments = synthesizer.getAvailableInstruments();
         
-            //currently loaded instruments in this synthesizer
+            //currently / automatically loaded instruments in this synthesizer
             this.loadedinstruments = synthesizer.getLoadedInstruments();
         
             /*
@@ -43,8 +42,7 @@ public class MidiSynthesizer {
              * with different preset numbers to each instrument
              * example: Instrument: Marimba bank #0 preset #12
              * banks are sets of instruments
-             */  
-        
+             */        
 
             //make a list of all loaded instrument names and program numbers
             if(loadedinstruments.length == 0){
@@ -67,7 +65,7 @@ public class MidiSynthesizer {
             }
         }
         catch(MidiUnavailableException e){
-            System.out.println(e);   
+            e.printStackTrace();   
         }   
     }    
 }
