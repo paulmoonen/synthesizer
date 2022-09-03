@@ -15,11 +15,11 @@ public class MidiPane extends JPanel{
     
     public MidiPane(){
         
-        this.playButton = new JButton("unmute");
+        this.playButton = new JButton("play");
         playButton.addActionListener(new ButtonListener());
         add(playButton);
 
-        this.stopButton = new JButton("mute");
+        this.stopButton = new JButton("stop");
         stopButton.addActionListener((new ButtonListener()));
         add(stopButton);
 
@@ -27,8 +27,7 @@ public class MidiPane extends JPanel{
         add(displaylist);
 
         this.playallsounds = new PlayAllSounds();    
-        playallsounds.startThread();
-
+        
     }
 
     class ButtonListener implements ActionListener{
