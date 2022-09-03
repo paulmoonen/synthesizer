@@ -7,7 +7,7 @@ import java.awt.event.*;
 
 public class MidiPane extends JPanel{
 
-    private JButton playButton;
+    private JButton startButton;
     private JButton stopButton;
     private JList<String> displaylist;
     private String[] dummygegevens = {"aap", "noot", "mies"};
@@ -15,11 +15,11 @@ public class MidiPane extends JPanel{
     
     public MidiPane(){
         
-        this.playButton = new JButton("unmute");
-        playButton.addActionListener(new ButtonListener());
-        add(playButton);
+        this.startButton = new JButton("play");
+        startButton.addActionListener(new ButtonListener());
+        add(startButton);
 
-        this.stopButton = new JButton("mute");
+        this.stopButton = new JButton("stop");
         stopButton.addActionListener((new ButtonListener()));
         add(stopButton);
 
@@ -33,7 +33,7 @@ public class MidiPane extends JPanel{
 
     class ButtonListener implements ActionListener{
         public void actionPerformed(ActionEvent e){
-            if(e.getSource() == playButton){                
+            if(e.getSource() == startButton){                
                 playallsounds.startPlaying();
             }
             if(e.getSource() == stopButton){                
