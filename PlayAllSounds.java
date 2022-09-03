@@ -6,6 +6,8 @@ import javax.sound.midi.MidiUnavailableException;
  * class PlayAllSounds inherits all the MidiSynthesizer class data
  * it is a thread to enable to close window while playing
  * provides methods to tart and stop playing
+ * 
+ * todo: study class Thread methods interrupt() wait() and notify()
  */
 public class PlayAllSounds extends MidiSynthesizer implements Runnable{
 
@@ -16,13 +18,16 @@ public class PlayAllSounds extends MidiSynthesizer implements Runnable{
         
         super();
         this.proceed = true;
-        usedchannel.setMute(true);       
+        usedchannel.setMute(true);
+        
+        //make a Thread by making a Thread object 
+        //using this PlayAllSounds instance
+        soundThread = new Thread(this);        
     
     }
 
     //begin thread
     public void startThread(){
-        soundThread = new Thread(this);
         soundThread.start();
     }
 
@@ -35,7 +40,12 @@ public class PlayAllSounds extends MidiSynthesizer implements Runnable{
     //stop playing
     public void stopPlaying(){        
         usedchannel.setMute(true);  
-        
+        // try {
+        //     soundThread.wait();
+        // } catch (InterruptedException e) {
+        //     // TODO Auto-generated catch block
+        //     e.printStackTrace();
+        // }
     }
 
     public void run(){
