@@ -34,18 +34,13 @@ public class PlayAllSounds extends MidiSynthesizer implements Runnable{
     //start playing
     public void startPlaying(){
         usedchannel.setMute(false);
-        //soundThread.notify();
+        
     }
 
     //stop playing
     public void stopPlaying(){        
         usedchannel.setMute(true);  
-        // try {
-        //     soundThread.wait();
-        // } catch (InterruptedException e) {
-        //     // TODO Auto-generated catch block
-        //     e.printStackTrace();
-        // }
+        
     }
 
     public void run(){
