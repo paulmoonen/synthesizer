@@ -7,10 +7,10 @@ import javax.swing.JFrame;
  * 
  * @author Paul Moonen
  */
-public class TonePlayer extends JFrame{
+public class StartupMainClass extends JFrame{
     public static void main(String[] args){        
         
-        JFrame frame = new TonePlayer();
+        JFrame frame = new StartupMainClass();
         frame.setSize(400, 400);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("Java MIDI sound player");

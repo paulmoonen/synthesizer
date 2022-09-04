@@ -9,12 +9,12 @@ import javax.sound.midi.MidiUnavailableException;
  * 
  * @author Paul Moonen
  */
-public class PlayAllSounds extends MidiSynthesizer implements Runnable{
+public class PlayAllSoundsRunnable extends MidiSynthesizer implements Runnable{
 
     private Thread soundThread;
     private boolean proceed; //boolean to stop the playing
     
-    public PlayAllSounds(){        
+    public PlayAllSoundsRunnable(){        
         super();//call constructor of parent class MidiSynthesizer
         this.proceed = false;                           
     }    

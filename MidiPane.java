@@ -13,7 +13,7 @@ public class MidiPane extends JPanel{
 
     private JButton playButton;
     private JButton stopButton;
-    private PlayAllSounds playallsounds; //a sound generation Runnable 
+    private PlayAllSoundsRunnable playallsounds; //a sound generation Runnable 
     
     public MidiPane(){
         
@@ -25,7 +25,7 @@ public class MidiPane extends JPanel{
         stopButton.addActionListener((new ButtonListener()));
         add(stopButton);      
 
-        this.playallsounds = new PlayAllSounds();          
+        this.playallsounds = new PlayAllSoundsRunnable();          
     }
     /**
      * inner class, event listener for buttons
