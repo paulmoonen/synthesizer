@@ -3,16 +3,17 @@ package synthesizer;
 import javax.swing.JFrame;
 
 /**
- * MIDI tonen via Java genereren
+ * start up class of application that plays Java MIDI sounds
  * 
+ * @author Paul Moonen
  */
-public class TonePlayer extends JFrame{
+public class StartupMainClass extends JFrame{
     public static void main(String[] args){        
         
-        JFrame frame = new TonePlayer();
+        JFrame frame = new StartupMainClass();
         frame.setSize(400, 400);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setTitle("play a Java MIDI note");
+        frame.setTitle("Java MIDI sound player");
         frame.setContentPane(new MidiPane());
         frame.setVisible(true);    
     } 
