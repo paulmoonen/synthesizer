@@ -12,10 +12,10 @@ import javax.sound.midi.MidiUnavailableException;
 public class PlayAllSoundsRunnable extends MidiSynthesizer implements Runnable{
 
     private Thread soundThread;
-    private boolean proceed; //boolean to stop the playing
+    private boolean proceed;            //boolean to stop the playing
     
     public PlayAllSoundsRunnable(){        
-        super();//call constructor of parent class MidiSynthesizer
+        super();                        //call constructor of parent class MidiSynthesizer
         this.proceed = false;                           
     }    
 
@@ -42,7 +42,7 @@ public class PlayAllSoundsRunnable extends MidiSynthesizer implements Runnable{
      * 
      */
     public void stopPlaying(){        
-        this.proceed = false;//next sound in the list will not be played
+        this.proceed = false;           //next sound in the list will not be played
         soundThread = null;
     }
 
@@ -61,7 +61,7 @@ public class PlayAllSoundsRunnable extends MidiSynthesizer implements Runnable{
         }
         instrumentsmap.forEach((program, instrumentname)->{
 
-            while(proceed){ //stop button pokes in right here
+            while(proceed){             //stop button pokes in right here
                 try{                    
                     usedchannel.programChange(program);//select a new sound ( - generating program )                    
                     usedchannel.noteOn(60, 100);//60 stands for central C pitch, 100 stands for volume

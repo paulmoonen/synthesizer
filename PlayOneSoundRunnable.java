@@ -7,12 +7,11 @@ public class PlayOneSoundRunnable extends MidiSynthesizer implements Runnable{
     private Thread soundThread;     //a Thread made out of this Runnable
     private int program;            //the sound to play
     private int volume;             //the volume
-    private int pitch;
+    private int pitch;              //the pitch
 
     public PlayOneSoundRunnable(){
         super();                    //call to constructor of parent class MidiSynthesizer    
-        this.volume = 100;          //a default volume setting
-            
+        this.volume = 100;          //a default volume setting            
     }
 
     /**
