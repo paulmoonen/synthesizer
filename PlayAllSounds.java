@@ -1,28 +1,27 @@
 package synthesizer;
 
-//import java.lang.Thread;
 import javax.sound.midi.MidiUnavailableException;
 
-/*
- * class PlayAllSounds inherits all the MidiSynthesizer class data
- * plays each sound that comes with the Java Midi synthesizer 
- * provides methods to tart and stop playing
+/** 
+ * Class PlayAllSounds inherits all the MidiSynthesizer class data.
+ * It plays each sound that comes with the Java Midi synthesizer, 
+ * and provides methods to tart and stop playing.
+ * 
+ * @author Paul Moonen
  */
 public class PlayAllSounds extends MidiSynthesizer implements Runnable{
 
     private Thread soundThread;
-    private boolean proceed;
+    private boolean proceed; //boolean to stop the playing
     
-    public PlayAllSounds(){
-        
-        super();
-        this.proceed = false;                       
-    
+    public PlayAllSounds(){        
+        super();//call constructor of parent class MidiSynthesizer
+        this.proceed = false;                           
     }    
 
-    /*
-     * start playing
-     * a new Thread is made
+    /**
+     * Start playing.
+     * A new Thread is made.
      */
     public void startPlaying(){
         this.proceed = true;
@@ -33,17 +32,26 @@ public class PlayAllSounds extends MidiSynthesizer implements Runnable{
             return;
         }
         //otherwise: let's do this!
+        //make a Thread out of this Runnable and start it up
         soundThread = new Thread(this);
-        soundThread.start();
-                
+        soundThread.start();                
     }
 
-    //stop playing
+    /**
+     * Stop playing.
+     * 
+     */
     public void stopPlaying(){        
-        this.proceed = false;
+        this.proceed = false;//next sound in the list will not be played
         soundThread = null;
     }
 
+    /**
+     * Method is indirectly called, by start().
+     * This is where the sounds are actually made.
+     * 
+     */
+    @Override
     public void run(){       
             
         try{
@@ -53,14 +61,13 @@ public class PlayAllSounds extends MidiSynthesizer implements Runnable{
         }
         instrumentsmap.forEach((program, instrumentname)->{
 
-            while(proceed){ //stop button pokes in tight here
+            while(proceed){ //stop button pokes in right here
                 try{                    
-                    usedchannel.programChange(program);
-                    usedchannel.noteOn(60, 100);
-                    Thread.sleep(1000);
-                    //a little silent gap
-                    usedchannel.noteOff(60);
-                    Thread.sleep(500);
+                    usedchannel.programChange(program);//select a new sound ( - generating program )                    
+                    usedchannel.noteOn(60, 100);//60 stands for central C pitch, 100 stands for volume
+                    Thread.sleep(1000);//continue playing for ms miliseconds
+                    usedchannel.noteOff(60);//silence ..
+                    Thread.sleep(500);// .. for half a second
                     
                 }catch(InterruptedException e){
                     e.printStackTrace();

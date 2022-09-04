@@ -4,11 +4,16 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import java.awt.event.*;
 
+/**
+ * Class provides buttons to interact with the sound generating parts of the application
+ * 
+ * @author Paul Moonen
+ */
 public class MidiPane extends JPanel{
 
     private JButton playButton;
     private JButton stopButton;
-    private transient PlayAllSounds playallsounds; //transient because IDE preferes it like that ...
+    private PlayAllSounds playallsounds; //a sound generation Runnable 
     
     public MidiPane(){
         
@@ -22,7 +27,9 @@ public class MidiPane extends JPanel{
 
         this.playallsounds = new PlayAllSounds();          
     }
-
+    /**
+     * inner class, event listener for buttons
+     */    
     class ButtonListener implements ActionListener{
         public void actionPerformed(ActionEvent e){
             if(e.getSource() == playButton){                
