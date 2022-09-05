@@ -2,6 +2,12 @@ package synthesizer;
 
 import javax.sound.midi.MidiUnavailableException;
 
+/**
+ * Class to play one sound.
+ * Class PlayOneSoundRunnable describes a runnable.
+ * It has a method to play a specific sound at a specific pitch. 
+ * That method then creates a Thread using this class runnable, and starts it up. 
+ */
 public class PlayOneSoundRunnable extends MidiSynthesizer implements Runnable{
 
     private Thread soundThread;     //a Thread made out of this Runnable
@@ -21,11 +27,11 @@ public class PlayOneSoundRunnable extends MidiSynthesizer implements Runnable{
      * @param int volume     * 
      */
     public void playSound(int program, int pitch){
+        soundThread = null;         //cut any previous sound that may be playing on this Thread
         this.program = program;
         this.pitch = pitch;
         this.soundThread = new Thread(this);
-        soundThread.start(); 
-
+        soundThread.start();
     }
 
     /**
@@ -42,7 +48,7 @@ public class PlayOneSoundRunnable extends MidiSynthesizer implements Runnable{
         try {
             usedchannel.programChange(program); //load the single instrument-sound-program of this Runnable
             usedchannel.noteOn(pitch, volume);  //start playing
-            Thread.sleep(2000);
+            Thread.sleep(3000);
             usedchannel.noteOff(pitch);
         } catch (InterruptedException e) {
             e.printStackTrace();

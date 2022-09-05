@@ -23,14 +23,17 @@ public class MidiPane extends JPanel{
     private String[] loadedinstrumentnames;         //list of all loaded instruments
         
     public MidiPane(){
+
+        //setLayout(new BorderLayout());
+        //setLayout(new GridLayout(2, 2));
         
         this.playButton = new JButton("play all sounds");
         playButton.addActionListener(new ButtonListener());
-        add(playButton);
+        add(playButton /*, BorderLayout.NORTH*/);
 
         this.stopButton = new JButton("stop");
         stopButton.addActionListener((new ButtonListener()));
-        add(stopButton);  
+        add(stopButton /* , BorderLayout.NORTH*/);  
           
         this.onesoundbutton =  new JButton("play selected sound");
         onesoundbutton.addActionListener(new ButtonListener());
@@ -41,10 +44,8 @@ public class MidiPane extends JPanel{
 
         this.instrumentslist = new JList<String>(loadedinstrumentnames);
         this.scrollpane = new JScrollPane(instrumentslist);
-        add(scrollpane);
-        add(onesoundbutton);
-        
-
+        add(scrollpane /*, BorderLayout.CENTER*/);
+        add(onesoundbutton /*, BorderLayout.SOUTH*/);
     }
     /**
      * inner class, event listener for buttons
