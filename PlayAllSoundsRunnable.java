@@ -12,10 +12,10 @@ import javax.sound.midi.MidiUnavailableException;
 public class PlayAllSoundsRunnable extends MidiSynthesizer implements Runnable{
 
     private Thread soundThread;
-    private boolean proceed; //boolean to stop the playing
+    private boolean proceed;            //boolean to stop the playing
     
     public PlayAllSoundsRunnable(){        
-        super();//call constructor of parent class MidiSynthesizer
+        super();                        //call constructor of parent class MidiSynthesizer
         this.proceed = false;                           
     }    
 
@@ -42,7 +42,7 @@ public class PlayAllSoundsRunnable extends MidiSynthesizer implements Runnable{
      * 
      */
     public void stopPlaying(){        
-        this.proceed = false;//next sound in the list will not be played
+        this.proceed = false;           //next sound in the list will not be played
         soundThread = null;
     }
 
@@ -59,21 +59,21 @@ public class PlayAllSoundsRunnable extends MidiSynthesizer implements Runnable{
         }catch(MidiUnavailableException e){
             e.printStackTrace();
         }
-        instrumentsmap.forEach((program, instrumentname)->{
-
-            while(proceed){ //stop button pokes in right here
+        
+        for(int i = 0; i < loadedinstrumentnames.length; i++){
+            while(proceed){                         //the stop button pokes in right here
                 try{                    
-                    usedchannel.programChange(program);//select a new sound ( - generating program )                    
-                    usedchannel.noteOn(60, 100);//60 stands for central C pitch, 100 stands for volume
-                    Thread.sleep(1000);//continue playing for ms miliseconds
-                    usedchannel.noteOff(60);//silence ..
-                    Thread.sleep(500);// .. for half a second
+                    usedchannel.programChange(i);   //select a new sound ( - generating program )                    
+                    usedchannel.noteOn(60, 100);    //60 stands for central C pitch, 100 stands for volume
+                    Thread.sleep(1000);             //continue playing for ms miliseconds
+                    usedchannel.noteOff(60);        //silence ..
+                    Thread.sleep(500);              // .. for half a second
                     
                 }catch(InterruptedException e){
                     e.printStackTrace();
                 }
             }
-        });           
+        }           
         synthesizer.close();                
     }    
 }

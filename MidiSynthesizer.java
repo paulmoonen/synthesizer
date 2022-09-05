@@ -1,8 +1,5 @@
 package synthesizer;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.sound.midi.Instrument;
 import javax.sound.midi.MidiChannel;
 import javax.sound.midi.MidiSystem;
@@ -26,7 +23,7 @@ public class MidiSynthesizer {
     protected MidiChannel usedchannel;
     protected Instrument[] availableinstruments;
     protected Instrument[] loadedinstruments;
-    protected Map<Integer, String> instrumentsmap;
+    protected String[] loadedinstrumentnames;
 
     public MidiSynthesizer(){
         try{        
@@ -44,26 +41,25 @@ public class MidiSynthesizer {
 
             //available instruments to this synthesizer
             this.availableinstruments = synthesizer.getAvailableInstruments(); 
-            //printAvailableInstruments();           
 
             //currently / automatically loaded instruments in this synthesizer
             this.loadedinstruments = synthesizer.getLoadedInstruments();
-            //printLoadedInstruments();
+            this.loadedinstrumentnames = new String[loadedinstruments.length];
         
             /*
              * the instruments all seem to be organised in bank #0
              * with different preset numbers to each instrument
              * example: Instrument: Marimba bank #0 preset #12
              * banks are sets of instruments
+             * 
+             * bank #0 contains 128 instrument program names, numbered 0 to 127
              */        
 
             //create hashmap of all loaded instrument names and program numbers
             if(loadedinstruments.length == 0){
-                System.out.println("no loaded instruments to play");
+                System.out.println("No loaded instruments to play.");
             }
-            if(loadedinstruments.length != 0){
-                
-                instrumentsmap = new HashMap<>(); 
+            if(loadedinstruments.length != 0){                
 
                 //loop through all instruments
                 for(Instrument instr : loadedinstruments){
@@ -72,8 +68,7 @@ public class MidiSynthesizer {
                     //a patch object contains bank number and instrument number
                     Patch patch = instr.getPatch();
                     int program = patch.getProgram();
-                    //add name and number to the instrumentsmap
-                    instrumentsmap.put(program, instrumentname);                      
+                    loadedinstrumentnames[program] = instrumentname;                      
                 }
             }
         }
@@ -86,7 +81,8 @@ public class MidiSynthesizer {
      * Print list of available instruments.
      */
     public void printAvailableInstruments(){
-        System.out.println("List of available instruments: ");
+        System.out.println("***** List of available instruments *****");
+        System.out.println("Number of available instruments is: " + availableinstruments.length);
         for(Instrument instr : availableinstruments){
             System.out.println(instr);
         }
@@ -97,7 +93,8 @@ public class MidiSynthesizer {
      * Print list of currently loaded instruments.
      */
     public void printLoadedInstruments(){
-        System.out.println("List of currently loaded instruments: ");
+        System.out.println("***** List of currently loaded instruments *****");
+        System.out.println("Number of currently loaded instruments is: " + loadedinstruments.length);
         for(Instrument instr : loadedinstruments){
             System.out.println(instr);
         }
@@ -105,11 +102,11 @@ public class MidiSynthesizer {
     }
 
     /**
-     * Returns HashMap of loaded instrument names and their program numbers.
+     * returns array of names of all loaded instruments
      * 
-     * @return Map<Integer, String> 
+     * @return String[] loadedinstrumentnames
      */
-    public Map getInstrumentsMap(){
-        return instrumentsmap;
+    public String[] getLoadedInstrumentNames(){
+        return loadedinstrumentnames;
     }
 }
