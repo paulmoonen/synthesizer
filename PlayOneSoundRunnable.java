@@ -17,7 +17,8 @@ public class PlayOneSoundRunnable extends MidiSynthesizer implements Runnable{
 
     public PlayOneSoundRunnable(){
         super();                    //call to constructor of parent class MidiSynthesizer    
-        this.volume = 100;          //a default volume setting            
+        this.volume = 100;          //a default volume setting     
+        this.usedchannel = midichannellist[1];       
     }
 
     /**

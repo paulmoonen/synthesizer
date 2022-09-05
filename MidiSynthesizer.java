@@ -18,12 +18,12 @@ import javax.sound.midi.Synthesizer;
  */
 public class MidiSynthesizer {
 
-    protected Synthesizer synthesizer;
-    protected MidiChannel[] midichannellist;
-    protected MidiChannel usedchannel;
-    protected Instrument[] availableinstruments;
-    protected Instrument[] loadedinstruments;
-    protected String[] loadedinstrumentnames;
+    protected Synthesizer synthesizer;              //interface for making MIDI sounds
+    protected MidiChannel[] midichannellist;        //all available channels
+    protected MidiChannel usedchannel;              //channel used by subclass
+    protected Instrument[] availableinstruments;    //all available instruments
+    protected Instrument[] loadedinstruments;       //all loaded instruments
+    protected String[] loadedinstrumentnames;       //instrument names, for selection in user interface
 
     public MidiSynthesizer(){
         try{        
@@ -36,9 +36,6 @@ public class MidiSynthesizer {
             this.midichannellist = synthesizer.getChannels();
             //System.out.println("Number of MIDI channels avalable: " + midichannellist.length);
             
-            //select a channel to use
-            this.usedchannel = midichannellist[0];
-
             //available instruments to this synthesizer
             this.availableinstruments = synthesizer.getAvailableInstruments(); 
 
