@@ -24,10 +24,10 @@ public class PlayOneSoundRunnable extends MidiSynthesizer implements Runnable{
      * Method to play a sound with a selected program / instrument, and pitch.
      * Makes a new Thread out of this Runnable object, and starts it.
      * @param int program: instrument or timbre
-     * @param int volume     * 
+     * @param int volume     
      */
     public void playSound(int program, int pitch){
-        soundThread = null;         //cut any previous sound that may be playing on this Thread
+        soundThread = null;         //stop any sound that may be playing on this Thread
         this.program = program;
         this.pitch = pitch;
         this.soundThread = new Thread(this);
@@ -49,7 +49,6 @@ public class PlayOneSoundRunnable extends MidiSynthesizer implements Runnable{
             usedchannel.programChange(program); //load the single instrument-sound-program of this Runnable
             usedchannel.noteOn(pitch, volume);  //start playing
             Thread.sleep(3000);
-            usedchannel.noteOff(pitch);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
