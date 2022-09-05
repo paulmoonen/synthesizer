@@ -16,7 +16,8 @@ public class PlayAllSoundsRunnable extends MidiSynthesizer implements Runnable{
     
     public PlayAllSoundsRunnable(){        
         super();                        //call constructor of parent class MidiSynthesizer
-        this.proceed = false;                           
+        this.proceed = false;
+        this.usedchannel = midichannellist[0];                           
     }    
 
     /**
