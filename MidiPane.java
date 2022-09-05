@@ -1,13 +1,8 @@
 package synthesizer;
 
 import javax.swing.JButton;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * Class provides buttons to interact with the sound generating parts of the application
@@ -18,13 +13,10 @@ public class MidiPane extends JPanel{
 
     private JButton playButton;
     private JButton stopButton;
-    private JButton onesoundbutton;
-    private JList soundscrollist;
+    //private JButton onesoundbutton;
     private PlayAllSoundsRunnable playallsounds;    //a sound generation Runnable 
-    private PlayOneSoundRunnable playonesound;      //a sound generating Runnable
-    private Map loadedinstruments;                  //a hashmap of all loaded instruments and their program numbers
-    private ArrayList<String> instrumentnames;               //list of the names of loaded instruments
-    
+    //private PlayOneSoundRunnable playonesound;      //a sound generating Runnable
+        
     public MidiPane(){
         
         this.playButton = new JButton("play");
@@ -35,16 +27,12 @@ public class MidiPane extends JPanel{
         stopButton.addActionListener((new ButtonListener()));
         add(stopButton);  
         
-        this.onesoundbutton =  new JButton("one sound");
-        onesoundbutton.addActionListener(new ButtonListener());
-        add(onesoundbutton);
+        // this.onesoundbutton =  new JButton("one sound");
+        // onesoundbutton.addActionListener(new ButtonListener());
+        // add(onesoundbutton);
 
         this.playallsounds = new PlayAllSoundsRunnable();  
-        this.loadedinstruments = playallsounds.getInstrumentsMap();
-        //fill arraylist instrumentnames
-             
-        
-        this.playonesound = new PlayOneSoundRunnable();       
+        //this.playonesound = new PlayOneSoundRunnable();       
 
     }
     /**
@@ -58,10 +46,10 @@ public class MidiPane extends JPanel{
             if(e.getSource() == stopButton){                
                 playallsounds.stopPlaying();                                   
             }
-            if(e.getSource() == onesoundbutton){
-                //program #, central C
-                playonesound.playSound(10, 60);
-            }
+            // if(e.getSource() == onesoundbutton){
+            //     //program #, central C
+            //     playonesound.playSound(10, 60);
+            // }
         }
     }    
 }
